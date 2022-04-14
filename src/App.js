@@ -1,30 +1,35 @@
 import React, { useState } from "react";
+import { v4 } from "uuid";
 import "./App.css";
 
 function App() {
   const [inputValue, setInputValue] = useState("");
 
   const [todo, setTodo] = useState([
-    { title: "jabuka" },
-    { title: "kruska" },
-    { title: "banana" },
-    { title: "sljiva" },
-    { title: "pomorandza" },
-    { title: "breskva" },
-    { title: "kajsija" },
-    { title: "orah" },
-    { title: "badem" },
-    { title: "avokado" },
-    { title: "mandarina" },
+    { id: v4(), title: "jabuka" },
+    { id: v4(), title: "kruska" },
+    { id: v4(), title: "banana" },
+    { id: v4(), title: "sljiva" },
+    { id: v4(), title: "pomorandza" },
+    { id: v4(), title: "breskva" },
+    { id: v4(), title: "kajsija" },
+    { id: v4(), title: "orah" },
+    { id: v4(), title: "badem" },
+    { id: v4(), title: "avokado" },
+    { id: v4(), title: "mandarina" },
   ]);
 
   const [filter, setFilter] = useState("");
 
   const formSubmit = (event) => {
     event.preventDefault();
-    setTodo([...todo, {title: inputValue}]);
+    setTodo([...todo, { id: v4(), title: inputValue }]);
     setInputValue("");
-}
+  };
+
+  const deleteHandler = ({ id }) => {
+    setTodo(todo.filter((item) => item.id !== id));
+  };
 
   return (
     <div>
@@ -60,9 +65,10 @@ function App() {
         })
         .map((item, key) => {
           return (
-            <div key={key}>
-              <li>{item.title}</li>
-            </div>
+            <li key={key}>
+              {item.title}{" "}
+              <button onClick={() => deleteHandler(item)}>X</button>
+            </li>
           );
         })}
     </div>
