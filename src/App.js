@@ -52,7 +52,7 @@ function App() {
   };
   //uzimanje vrednosti inputa i kreiranje novog steta
   const handleEditInputChange = (event) => {
-    setCurrentTodo({ ...currentTodo, title: event.target.value });   
+    setCurrentTodo({ ...currentTodo, title: event.target.value });
   };
 
   //update to do  kad je form submited
@@ -66,14 +66,15 @@ function App() {
     const updatedItem = todo.map((item) => {
       return item.id === id ? updatedTodo : item;
     });
-
+    //poziva se unutar onSubmit funkcije;podatak je submitovan i vise ne editujemo
     setIsEditing(false);
     setTodo(updatedItem);
   };
 
-  const handleEditClick = (todo) => {
+  const handleEditClick = (item) => {
     setIsEditing(true);
-    setCurrentTodo({ ...todo });
+    //setujem currentTodo na todo na koji je kliknuto
+    setCurrentTodo({ ...item });
   };
 
   //Paginacija
@@ -184,7 +185,7 @@ function App() {
           return (
             <li key={key}>
               {item.title}{" "}
-              <button onClick={() => handleEditClick(inputValue)}>Edit</button>
+              <button onClick={() => handleEditClick(item)}>Edit</button>
               <button onClick={() => deleteHandler(item)}>X</button>
             </li>
           );
