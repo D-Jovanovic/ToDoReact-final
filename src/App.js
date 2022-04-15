@@ -23,12 +23,14 @@ function App() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
+
   //Dodavanje
   const formSubmit = (event) => {
     event.preventDefault();
     setTodo([...todo, { id: v4(), title: inputValue }]);
     setInputValue("");
   };
+
   //Brisanje
   const deleteHandler = ({ id }) => {
     setTodo(todo.filter((item) => item.id !== id));
@@ -40,9 +42,14 @@ function App() {
     pages.push(i);
   }
 
+  const handleClick = (event) =>{
+    setCurrentPage(Number(event.target.id));
+  }
+
   const pageNumbers = pages.map((num) => {
     return (
-      <li key={num} id={num}>
+      <li key={num} id={num} onClick={handleClick}
+      className={currentPage === num ? "active" : ""}>
         {num}
       </li>
     );
@@ -51,11 +58,13 @@ function App() {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = todo.slice(indexOfFirstItem, indexOfLastItem);
+  console.log(currentItems);
+
   
 
-
   return (
-    <div>
+    <div className="todoHolder">
+      <h1>To Do App</h1>
       <form onSubmit={formSubmit}>
         <input
           type="text"
@@ -96,8 +105,7 @@ function App() {
         })}
       <div>
         <ul className="pageNumbers">{pageNumbers}</ul>
-      </div>
-      
+      </div> 
     </div>
   );
 }
