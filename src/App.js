@@ -47,13 +47,33 @@ function App() {
   };
 
   //Edit
-  /*
-  const handleEditInputChange(event) {
-    setCurrentTodo({...currentTodo, title: event.target.value});
-    console.log(currentTodo);
-  }
-  */
- 
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleEditInputChange = (event) => {
+    setCurrentTodo({ ...currentTodo, title: event.target.value });
+  };
+
+  const handleEditFormSubmit = (event) => {
+    event.preventDefault();
+    handleUpdateTodo(currentTodo.id, currentTodo);
+  };
+
+  const handleUpdateTodo = (id, updatedTodo) => {
+    const updatedItem = todo.map((item) => {
+      return item.id === id ? updatedTodo : item; 
+    });
+
+    setIsEditing(false);
+    setTodo(updatedItem);
+  };
+
+  const handleEditClick = (todo) => {
+    setIsEditing(true);
+    setCurrentTodo({ ...todo });
+  };
+
   //Paginacija
   const pages = [];
   for (let i = 1; i < Math.ceil(todo.length / itemsPerPage); i++) {
@@ -84,7 +104,7 @@ function App() {
 
   return (
     <div className="todoHolder">
-      <h1>To Do App</h1>
+      {/*<h1>To Do App</h1>
       <form onSubmit={formSubmit}>
         <input
           type="text"
@@ -106,7 +126,37 @@ function App() {
         onChange={(event) => {
           setFilter(event.target.value);
         }}
-      />
+      />*/}
+      {isEditing ? (
+        <form onSubmit={handleEditFormSubmit}>
+          <h2>Edit Todo</h2>
+          <label htmlFor="editTodo">Edit todo: </label>
+          <input
+            name="editTodo"
+            type="text"
+            placeholder="Edit todo"
+            value={currentTodo.title}
+            onChange={handleEditInputChange}
+          />
+          <button type="submit">Update</button>
+          <button onClick={() => setIsEditing(false)}>Cancel</button>
+        </form>
+      ) : (
+        <form onSubmit={formSubmit}>
+          <h2>Add Todo</h2>
+          <label htmlFor="todo">Add todo: </label>
+          <input
+            name="todo"
+            type="text"
+            placeholder="Create a new todo"
+            value={inputValue} 
+            required
+            onChange={handleInputChange}
+          />
+          <button type="submit">Add</button>
+        </form>
+      )}
+
       {todo
         .filter((item) => {
           if (filter === "") {
@@ -119,6 +169,7 @@ function App() {
           return (
             <li key={key}>
               {item.title}{" "}
+              <button onClick={() => handleEditClick(inputValue)}>Edit</button>
               <button onClick={() => deleteHandler(item)}>X</button>
             </li>
           );
