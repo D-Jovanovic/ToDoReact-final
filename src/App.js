@@ -4,7 +4,9 @@ import { v4 } from "uuid";
 import "./App.css";
 
 function App() {
+  //state za vrednost u inputu
   const [inputValue, setInputValue] = useState("");
+  //state za todo listu
   const [todo, setTodo] = useState([
     { id: v4(), title: "jabuka" },
     { id: v4(), title: "kruska" },
@@ -19,10 +21,18 @@ function App() {
     { id: v4(), title: "mandarina" },
   ]);
 
+  //state za search filter pretragu
   const [filter, setFilter] = useState("");
 
+  //state paginacija trenutna strana
   const [currentPage, setCurrentPage] = useState(1);
+  //state paginacija stavki po strani
   const [itemsPerPage, setItemsPerPage] = useState(5);
+
+  //state za pracenje da li editujemo todo stavku
+  const [isEditing, setIsEditing] = useState(false);
+  //state kako bi znao koju todo stavku menjam
+  const [currentTodo, setCurrentTodo] = useState({});
 
   //Dodavanje
   const formSubmit = (event) => {
@@ -36,20 +46,32 @@ function App() {
     setTodo(todo.filter((item) => item.id !== id));
   };
 
+  //Edit
+  /*
+  const handleEditInputChange(event) {
+    setCurrentTodo({...currentTodo, title: event.target.value});
+    console.log(currentTodo);
+  }
+  */
+ 
   //Paginacija
   const pages = [];
   for (let i = 1; i < Math.ceil(todo.length / itemsPerPage); i++) {
     pages.push(i);
   }
 
-  const handleClick = (event) =>{
+  const handleClick = (event) => {
     setCurrentPage(Number(event.target.id));
-  }
+  };
 
   const pageNumbers = pages.map((num) => {
     return (
-      <li key={num} id={num} onClick={handleClick}
-      className={currentPage === num ? "active" : ""}>
+      <li
+        key={num}
+        id={num}
+        onClick={handleClick}
+        className={currentPage === num ? "active" : ""}
+      >
         {num}
       </li>
     );
@@ -59,8 +81,6 @@ function App() {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = todo.slice(indexOfFirstItem, indexOfLastItem);
   console.log(currentItems);
-
-  
 
   return (
     <div className="todoHolder">
@@ -105,7 +125,7 @@ function App() {
         })}
       <div>
         <ul className="pageNumbers">{pageNumbers}</ul>
-      </div> 
+      </div>
     </div>
   );
 }
