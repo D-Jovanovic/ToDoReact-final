@@ -50,19 +50,21 @@ function App() {
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
-
+  //uzimanje vrednosti inputa i kreiranje novog steta
   const handleEditInputChange = (event) => {
-    setCurrentTodo({ ...currentTodo, title: event.target.value });
+    setCurrentTodo({ ...currentTodo, title: event.target.value });   
   };
 
+  //update to do  kad je form submited
   const handleEditFormSubmit = (event) => {
     event.preventDefault();
     handleUpdateTodo(currentTodo.id, currentTodo);
   };
 
+  //funkcija za editovanje todo stavke
   const handleUpdateTodo = (id, updatedTodo) => {
     const updatedItem = todo.map((item) => {
-      return item.id === id ? updatedTodo : item; 
+      return item.id === id ? updatedTodo : item;
     });
 
     setIsEditing(false);
@@ -143,19 +145,32 @@ function App() {
         </form>
       ) : (
         <form onSubmit={formSubmit}>
-          <h2>Add Todo</h2>
+          <h2>Todo App</h2>
           <label htmlFor="todo">Add todo: </label>
           <input
             name="todo"
             type="text"
             placeholder="Create a new todo"
-            value={inputValue} 
+            value={inputValue}
             required
             onChange={handleInputChange}
           />
           <button type="submit">Add</button>
         </form>
       )}
+      {
+        <>
+          <label htmlFor="search">Search:</label>
+          <input
+            name="search"
+            type="text"
+            placeholder="Search..."
+            onChange={(event) => {
+              setFilter(event.target.value);
+            }}
+          />
+        </>
+      }
 
       {todo
         .filter((item) => {
