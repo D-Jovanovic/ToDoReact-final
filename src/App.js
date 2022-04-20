@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { v4 } from "uuid";
 
-import "./App.css";
+import style from "./App.module.css";
 
 import AddToDoItem from "./components/AddToDoItem";
 import EditToDoItem from "./components/EditToDoItem";
@@ -9,7 +9,7 @@ import Pagination from "./components/Pagination";
 import SearchToDoItem from "./components/SearchToDoItem";
 import ToDoItems from "./components/ToDoItems";
 
-function App() {
+const App = () =>  {
   //state za vrednost u inputu
   const [inputValue, setInputValue] = useState("");
   //state za todo listu
@@ -91,7 +91,7 @@ function App() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="todoHolder">
+    <div className={style.todoHolder}>
       {isEditing ? (
         <EditToDoItem
           currentTodo={currentTodo.title}
@@ -117,6 +117,7 @@ function App() {
         itemsPerPage={itemsPerPage}
         totalItems={todo.length}
         paginate={paginate}
+        currentPage={currentPage}
       />
     </div>
   );

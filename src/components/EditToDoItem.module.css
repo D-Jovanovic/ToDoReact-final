@@ -1,0 +1,21 @@
+.headerCenter{
+    text-align: center;
+}
+
+.formHolder{
+    /* border: 5px solid green;*/
+     display: flex;
+     gap: 10px;
+ }
+
+.formHolder label{
+
+}
+
+.formHolder input{
+    flex-grow: 4;
+}
+
+.formHolder button {
+    flex-grow: 1;
+}

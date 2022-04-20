@@ -1,6 +1,8 @@
 import React from "react";
 
-const Pagination = ({ itemsPerPage, totalItems, paginate }) => {
+import style from "./Pagination.module.css";
+
+const Pagination = ({ itemsPerPage, totalItems, paginate, currentPage }) => {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
@@ -8,12 +10,14 @@ const Pagination = ({ itemsPerPage, totalItems, paginate }) => {
   }
 
   return (
-    <ul>
+    <ul className={style.pageNumbers}>
       {pageNumbers.map((number) => (
-        <li key={number}>
-          <a onClick={() => paginate(number)} href="!#">
-            {number}
-          </a>
+        <li
+          onClick={() => paginate(number)}
+          key={number}
+          className={currentPage == number ? "active" : ""}
+        >
+          {number}
         </li>
       ))}
     </ul>

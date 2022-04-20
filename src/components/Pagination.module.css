@@ -1,0 +1,22 @@
+.pageNumbers {
+  border: 1px solid rgb(236, 19, 19);
+  list-style: none;
+  display: flex;
+  position: absolute;
+  bottom: 10px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.pageNumbers li {
+  margin: 1px;
+  border-radius: 10px;
+  padding: 5px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.pageNumbers li.active {
+  background-color: rgb(72, 151, 224);
+  color: rgb(207, 26, 26);
+}

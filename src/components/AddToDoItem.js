@@ -1,10 +1,12 @@
 import React from "react";
 
+import style from "./AddToDoItem.module.css";
+
 function AddToDoItem({ inputValue, onAddFormSubmit, onAddInputChange }) {
   return (
     <>
-      <form onSubmit={onAddFormSubmit}>
-        <h2>Todo App</h2>
+    <h2 className={style.headerCenter}>Todo App</h2>
+      <form onSubmit={onAddFormSubmit} className={style.formHolder}>
         <label htmlFor="todo">Add todo: </label>
         <input
           name="todo"

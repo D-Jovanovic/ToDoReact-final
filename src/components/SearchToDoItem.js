@@ -1,9 +1,12 @@
 import React from "react";
 
+import style from "./SearchToDoItem.module.css"
+
+
 function SearchToDoItem({setFilter}) {
   return (
-    <>
-      <label htmlFor="search">Search:</label>
+    <div className={style.formHolder}>
+      <label htmlFor="search" >Search:</label>
       <input
         name="search"
         type="text"
@@ -12,7 +15,7 @@ function SearchToDoItem({setFilter}) {
           setFilter(event.target.value);
         }}
       />
-    </>
+    </div>
   );
 }
 
