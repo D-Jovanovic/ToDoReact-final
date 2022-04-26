@@ -1,0 +1,18 @@
+.listOfItems {
+  border: 1px solid black;
+  list-style-type: none;
+  margin: 0px 10px;
+  padding: 5px;
+  position: relative;
+  
+}
+
+
+.listOfItems:nth-child(n + 2) {
+    margin-top: -1px;
+}
+
+.listOfItems button{
+    float: right;
+    margin-left: 10px;
+}

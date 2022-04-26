@@ -1,5 +1,7 @@
 import React from "react";
 
+import styles from "./ToDoItems.module.css";
+
 function ToDoItems({ todo, filter, onHandleEditClick, onHandleDeleteClick }) {
   return (
     <>
@@ -13,7 +15,7 @@ function ToDoItems({ todo, filter, onHandleEditClick, onHandleDeleteClick }) {
         })
         .map((item, key) => {
           return (
-            <li key={key}>
+            <li key={key} className={styles.listOfItems}>
               {item.title}{" "}
               <button onClick={() => onHandleEditClick(item)}>Edit</button>
               <button onClick={() => onHandleDeleteClick(item)}>X</button>
